@@ -111,12 +111,13 @@ export default class UserSignUp extends Component {
             .then(() => {
               this.props.history.push('/authenticated');    
             });
+            console.log(`${firstName} ${lastName} is successfully signed up and authenticated!`);
         }
     })
     .catch( err => {
       console.log(err);
       // push a new entry onto the history stack using the push() method
-      this.props.history.push('/error');
+      this.props.history.push('/');
     });
   }
 

@@ -3,9 +3,9 @@
 // load modules
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors')
-const {userRoutes, courseRoutes} = require('./routes/');
-const { sequelize } = require('./models');
+const { sequelize, Sequelize } = require('./database');
+const routes = require('./routes');
+const cors = require('cors');
 
 
 // variable to enable global error logging
@@ -14,14 +14,31 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 // create the Express app
 const app = express();
 
-// enable cors
-app.use(cors());
-
-// Setup request body JSON parsing.
-app.use(express.json());
-
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
+
+//enable all CORS requests
+app.use(cors());
+
+//testing connection to the database
+console.log('Testing the connection to the database...');
+
+(async () => {
+  try {
+    await sequelize.sync();
+    console.log('Models are synchronized with the database!');
+
+    await sequelize.authenticate();
+    console.log('Connection to the database successful!');
+
+  } catch (error) {
+    console.log('Error connecting to the database: ', error);
+  }
+})();
+
+//middleware
+app.use(express.json());
+app.use(express.urlencoded( {extended: true} ));
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
@@ -30,8 +47,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// Add routes.
-app.use('/api', userRoutes, courseRoutes);
+app.use('/api', routes);
 
 // send 404 if no other route matched
 app.use((req, res) => {
@@ -55,20 +71,7 @@ app.use((err, req, res, next) => {
 // set our port
 app.set('port', process.env.PORT || 5000);
 
-// Test the database connection.
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-})();
-
-// Sequelize model synchronization, then start listening on our port.
-sequelize.sync()
-  .then( () => {
-    const server = app.listen(app.get('port'), () => {
-      console.log(`Express server is listening on port ${server.address().port}`);
-    });
-  });
+// start listening on our port
+const server = app.listen(app.get('port'), () => {
+  console.log(`Express server is listening on port ${server.address().port}`);
+});

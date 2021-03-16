@@ -20,8 +20,8 @@ const AuthWithContext = withContext(Authenticated);
 const UserSignUpWithContext = withContext(UserSignUp)
 const UserSignInWithContext = withContext(UserSignIn)
 const UserSignOutWithContext = withContext(UserSignOut);
-// This connects the UserSignUp component to context. In other words, 
-// UserSignUp is now a consuming component that's subscribed to all context changes.
+// This connects the component to context. 
+// Each is now a consuming component subscribed to all context changes.
 // When React renders a component that subscribes to context, it will read the context value passed to it from its Provider.
 
 export default () => (

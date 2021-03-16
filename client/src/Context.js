@@ -56,7 +56,7 @@ export class Provider extends Component {
       // First arg gives name of cookie, second gives value, third is options object
       Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 }); // 1 day
     }
-    return user;
+    // return user;
     // e.g. returned promise value: {name: "Guil", username: "guil@guil.com"}
   }
 

@@ -28,7 +28,7 @@ export default class UserSignIn extends Component {
             elements={() => (
               <React.Fragment>
                 <input 
-                  id="emeailAddress" 
+                  id="emailAddress" 
                   name="emailAddress" 
                   type="text"
                   value={emailAddress} 
@@ -65,11 +65,10 @@ export default class UserSignIn extends Component {
   submit = () => {
     // extract the context prop from this.props
     const { context } = this.props;
+    const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
     
     // unpack properties from the state object – these are the properties needed to sign in a user
     const { emailAddress, password } = this.state;
-
-    const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
 
     // call the getUser API method (in Data.js) and returns a promise
     context.actions.signIn(emailAddress, password) // made available via the provider value prop
