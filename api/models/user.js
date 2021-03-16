@@ -57,19 +57,14 @@ module.exports = (sequelize) => {
           notEmpty: {
               msg: 'Please provide a password'
           },
-          // Require a length between 6 and 20 characters
-          len: {
-              args: [6, 20],
-              msg: 'The password should be between 6 and 20 characters in length'
-          }
       }
   }
 }, { sequelize });
 
-    User.addHook(
-      "beforeCreate",
-      user => (user.password = bcrypt.hashSync(user.password, 10))
-  );
+  //   User.addHook(
+  //     "beforeCreate",
+  //     user => (user.password = bcrypt.hashSync(user.password, 10))
+  // );
 
   User.associate = (models) => {
     User.hasMany(models.Course, {

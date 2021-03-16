@@ -4,16 +4,18 @@ import Form from './Form';
 
 export default class UserSignUp extends Component {
   state = {
-    name: '',
-    username: '',
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
     password: '',
     errors: [],
   }
 
   render() {
     const {
-      name,
-      username,
+      firstName,
+      lastName,
+      emailAddress,
       password,
       errors,
     } = this.state;
@@ -31,19 +33,26 @@ export default class UserSignUp extends Component {
             // a function which returns the input fields to be used in each of the forms:
               <React.Fragment>
                 <input 
-                  id="name" 
-                  name="name" 
+                  id="firstName" 
+                  name="firstName" 
                   type="text"
-                  value={name} 
+                  value={firstName} 
                   onChange={this.change} 
-                  placeholder="Name" />
+                  placeholder="First Name" />
                 <input 
-                  id="username" 
-                  name="username" 
+                  id="lastName" 
+                  name="lastName" 
                   type="text"
-                  value={username} 
+                  value={lastName} 
                   onChange={this.change} 
-                  placeholder="User Name" />
+                  placeholder="Last Name" />
+                <input 
+                  id="emailAddress" 
+                  name="emailAddress" 
+                  type="text"
+                  value={emailAddress} 
+                  onChange={this.change} 
+                  placeholder="Email Address" />
                 <input 
                   id="password" 
                   name="password"
@@ -78,15 +87,17 @@ export default class UserSignUp extends Component {
 
     // unpack the properties from the state object (this.state) into distinct variables:
     const {
-      name,
-      username,
+      firstName,
+      lastName,
+      emailAddress,
       password,
     } = this.state;
 
     // New user payload that will be passed to the createUser() method
     const user = {
-      name,
-      username,
+      firstName,
+      lastName,
+      emailAddress,
       password,
     };
 
@@ -96,7 +107,7 @@ export default class UserSignUp extends Component {
         if(errors.length) {
           this.setState({errors});
         } else {
-          context.actions.signIn(username, password)
+          context.actions.signIn(emailAddress, password)
             .then(() => {
               this.props.history.push('/authenticated');    
             });

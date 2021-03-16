@@ -34,13 +34,14 @@ export default class Data {
     }
     else if (response.status === 401) {
       return null;
-    }
-    else {
+    // } else if (response.status === 500) {
+    //   this.props.history.push('/error')
+    } else {
       throw new Error();
     }
   }
-  // Basic auth is all set up on the client side by now
   
+  // POST request to API
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
@@ -50,8 +51,9 @@ export default class Data {
       return response.json().then(data => {
         return data.errors;
       });
-    }
-    else {
+    // } else if (response.status === 500) {
+    //   this.props.history.push('/error')
+    } else {
       throw new Error();
     }
   }

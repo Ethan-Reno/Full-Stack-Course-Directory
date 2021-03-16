@@ -4,8 +4,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors')
-const userRoutes = require('./routes/user');
-const courseRoutes = require('./routes/course');
+const {userRoutes, courseRoutes} = require('./routes/');
 const { sequelize } = require('./models');
 
 

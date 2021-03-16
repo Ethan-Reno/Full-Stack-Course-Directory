@@ -6,14 +6,14 @@ const Context = React.createContext();
 
 export class Provider extends Component {
 
-  state = {
-    authenticatedUser: Cookies.getJSON('authenticatedUser') || null
-  };
-
   constructor() {
     super();
     this.data = new Data();
   }
+
+  state = {
+    authenticatedUser: Cookies.getJSON('authenticatedUser') || null
+  };
   
 
   render() {
@@ -43,8 +43,9 @@ export class Provider extends Component {
 
   // uses credentials to call the getUser() method in Data.js
   // which makes a GET request to the protected /users route on the server and returns the user data.
-  signIn = async (username, password) => {
-    const user = await this.data.getUser(username, password);
+  signIn = async (emailAddress, password) => {
+    const user = await this.data.getUser(emailAddress, password);
+    // user.password = password;
     if (user !== null) {
       this.setState(() => {
         return {
