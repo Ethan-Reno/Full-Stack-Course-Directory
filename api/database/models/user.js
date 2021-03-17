@@ -59,7 +59,6 @@ module.exports = (sequelize) => {
         }
     }, { sequelize });
 
-    //Has Many relationship side
     User.associate = (models) => {
         User.hasMany(models.Course, {
             foreignKey: {

@@ -11,7 +11,7 @@ const sequelize = new Sequelize({
 
 const models = {};
 
-//import all of the models
+//import models
 fs
     .readdirSync(path.join(__dirname, 'models'))
     .forEach((file) => {
