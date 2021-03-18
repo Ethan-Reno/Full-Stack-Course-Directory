@@ -1,12 +1,10 @@
 import React from 'react';
 
-
- //UPDATE
 const Forbidden = () => {
     return(
         <div className="bounds">
-            <h1>Forbidden</h1>
-            <p>Oh oh! You can't access this page.</p>   
+            <h1>Forbidden Route</h1>
+            <p>You are not authorized to see this page</p>   
         </div>
     )
 }
