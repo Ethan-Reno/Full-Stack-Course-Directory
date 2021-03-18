@@ -7,6 +7,7 @@ import {
 
 import Header from './components/Header';
 import Courses from './components/Courses';
+import CourseDetail from './components/CourseDetail';
 import NotFound from './components/NotFound';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
@@ -17,8 +18,9 @@ import PrivateRoute from './PrivateRoute';
 
 const HeaderWithContext = withContext(Header);
 const AuthWithContext = withContext(Authenticated);
-const UserSignUpWithContext = withContext(UserSignUp)
-const UserSignInWithContext = withContext(UserSignIn)
+const CourseDetailWithContext = withContext(CourseDetail);
+const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
 // This connects the component to context. 
 // Each is now a consuming component subscribed to all context changes.
@@ -33,6 +35,7 @@ export default () => (
         <Route exact path="/" component={Courses} />
         <PrivateRoute path="/authenticated" component={AuthWithContext} />
         <PrivateRoute path="/settings" component={AuthWithContext} />
+        <Route path="/courses/:id" component={CourseDetailWithContext} />
         <Route path="/signin" component={UserSignInWithContext} />
         <Route path="/signup" component={UserSignUpWithContext} />
         <Route path="/signout" component={UserSignOutWithContext} />

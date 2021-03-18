@@ -12,7 +12,6 @@ export default class Courses extends Component {
     axios.get('http://localhost:5000/api/courses')
       .then(data => {
         this.setState({courses: data.data, user: data.data.User})
-        console.log(this.state.courses)
       })
       .catch(err => {
         this.props.history.push('/error')
@@ -24,8 +23,7 @@ export default class Courses extends Component {
     if (updateProps.location.pathame !== this.props.location.pathname){
       axios.get('http://localhost:5000/api/courses')
         .then(data => {
-          this.setState({ courses: data.data, user: data.data.User });
-          console.log(this.state.courses)
+          this.setState({courses: data.data, user: data.data.User});
         })
       .catch(err => {
         console.log(err)
