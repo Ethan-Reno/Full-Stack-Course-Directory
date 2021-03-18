@@ -101,7 +101,7 @@ export default class UserSignUp extends Component {
       password,
     };
 
-    // Create a user, sign them in, and redirect them to the /authenticated route
+    // Create a user, sign them in, and redirect them to the /courses route
     context.data.createUser(user) // made available via Context from data.js
     .then( errors => {
         if(errors.length) {
@@ -109,7 +109,7 @@ export default class UserSignUp extends Component {
         } else {
           context.actions.signIn(emailAddress, password)
             .then(() => {
-              this.props.history.push('/authenticated');    
+              this.props.history.push('/courses');    
             });
             console.log(`${firstName} ${lastName} is successfully signed up and authenticated!`);
         }

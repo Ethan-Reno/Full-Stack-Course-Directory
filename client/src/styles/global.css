@@ -455,6 +455,7 @@ p {
 /* line 188, ../sass/global.sass */
 .course--description textarea {
   margin-bottom: 60px;
+  resize: none;
 }
 /* line 190, ../sass/global.sass */
 .course--description p {
@@ -571,6 +572,42 @@ p {
   margin-bottom: 15px;
   list-style-type: circle;
 }
+
+
+/* line 287, ../sass/global.sass */
+.course--add--list h4 {
+  font-family: "Cousine";
+  font-weight: 100;
+  color: #999;
+  font-size: 14px;
+  padding: 0 0 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* line 300, ../sass/global.sass */
+.course--add--list h3 {
+  font-family: "Work Sans", sans-serif;
+  font-size: 18px;
+}
+/* line 303, ../sass/global.sass */
+.course--add--list > li {
+  margin-bottom: 10px;
+}
+/* line 305, ../sass/global.sass */
+.course--add--list > li ul {
+  padding-left: 20px;
+}
+/* line 307, ../sass/global.sass */
+.course--add--list > li li {
+  margin-bottom: 15px;
+  list-style-type: circle;
+}
+
 /* line 311, ../sass/global.sass */
 .course--time--input {
   font-family: "Work Sans", sans-serif;
