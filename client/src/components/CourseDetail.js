@@ -14,8 +14,8 @@ export default class CourseDetail extends Component {
   componentDidMount() {
     axios.get(`http://localhost:5000/api/${this.props.match.url}`)
       .then(data => {
-        this.setState({courses: data.data, user: data.data.User});
-        console.log(this.props.match)
+        this.setState({course: data.data, user: data.data.User});
+        //console.log(this.props.match)
       })
       .catch(err => {
         console.log(err)
@@ -48,13 +48,58 @@ export default class CourseDetail extends Component {
 
   render(){
 
+    const {context} = this.props;
+    const authenticatedUser = context.authenticatedUser;
+
     return(
       <div>
         <div className="actions--bar">
-
+          <div className="bounds">
+            {/*If the user is authenticated and the owner of the course, render links to the POST and DELETE routes*/}
+            {authenticatedUser && authenticatedUser.id === this.state.course.userId ?
+              <React.Fragment>
+                <div className ="grid-100">
+                  <span>
+                    <Link className="button" to={`${this.props.match.url}/update`}>Update Course</Link>
+                    <Link className="button" to="/courses" onClick={this.handleDelete}>Delete Course</Link>
+                    <Link className="button button-secondary" to="/courses">Go back</Link>
+                  </span>
+                </div>
+              </React.Fragment>
+              :
+              <React.Fragment>
+                <Link className="button button-secondary" to="/courses">Go back</Link>
+              </React.Fragment>
+            }
+          </div>
+        </div>
+        <div className ="bounds course-detail">
+          <div className ="grid-66">
+            <div className="course--header">
+              <h4 className="course--label">Course</h4>
+              <h3 className="course--title">{this.state.course.title}</h3>
+              <p>By {this.state.user.firstName} {this.state.user.lastName}</p>
+            </div>
+            <div>
+              <p>{this.state.course.description}</p>
+            </div>
+        </div>
+        <div className="grid-25 grid-right">
+          <div className="course--stats">
+            <ul className="course--stats--list">
+              <li className="course--stats--list--item">
+                <h4>Estimated Time</h4>
+                  <li>{this.state.course.estimatedTime}</li>
+              </li> 
+              <li className="course--stats--list--item">
+                <h4>Materials Needed</h4>
+                  <li>{this.state.course.materialsNeeded}</li>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
     )
   }
-
 }
