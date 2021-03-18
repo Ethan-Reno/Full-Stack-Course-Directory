@@ -139,36 +139,35 @@ export default class UpdateCourse extends Component {
   }
 
   submit = () => {
-      const { context } = this.props;
+    const { context } = this.props;
 
-      const authUser = context.authenticatedUser;
-      const authUserpass = authUser.password;
-      const authUseremail = authUser.emailAddress;
+    const authUser = context.authenticatedUser;
+    const authUserpass = authUser.password;
+    const authUseremail = authUser.emailAddress;
 
-      const course = this.state;
-      const id = this.props.match.params.id;
+    const course = this.state;
+    const id = this.props.match.params.id;
 
-      //triggers updateCourse API call on submit
-      context.data.updateCourse(id, course, authUseremail, authUserpass)
-          .then(errors => {
-              if (errors) {
-                  this.setState({ errors })
-                  return { errors: [`Course ${course.title} was NOT updated in database`] }
-              } else {
-                  this.setState({ course })
-                  this.props.history.push('/');
-                  console.log(`SUCCESS! course ${course.title} has been updated!`);
-              }
-          })
-          .catch(err => {
-              console.log(err);
-              this.props.history.push('/forbidden')
-          })
+    // updateCourse API call when submitting form
+    context.data.updateCourse(id, course, authUseremail, authUserpass)
+      .then(errors => {
+        if (errors) {
+          this.setState({errors})
+          return { errors: [`Course ${course.title} did not update`] }
+        } else {
+          this.setState({course})
+          this.props.history.push('/');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        this.props.history.push('/forbidden')
+      })
   }
 
   cancel = () => {
-      //redirects user to previous page
-      this.props.history.push(this.props.history.go(-1)); 
+    //redirects user to previous page
+    this.props.history.push(this.props.history.go(-1)); 
   }
 }
 

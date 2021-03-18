@@ -98,7 +98,6 @@ router.post('/users', asyncHandler(async (req, res, next) => {
         await User.create(req.body);
         //sets location header
         res.location('/');
-        console.log(`User ${req.body.firstName} ${req.body.lastName} created successfully!`);
         res.status(201).end();
     } catch (error) {
         console.log('Error: ', error.name);
@@ -157,7 +156,6 @@ router.get('/courses/:id', asyncHandler(async (req, res, next) => {
 router.post('/courses', this.authenticateUser, asyncHandler(async (req, res, next) => {
     try {
         let course = await Course.create(req.body);
-        console.log(`Course "${req.body.title}" created successfully!`);
         res.location(`/courses/${course.dataValues.id}`); //sets location header to 
         res.status(201).end();
     } catch (error) {
@@ -179,7 +177,6 @@ router.put('/courses/:id', this.authenticateUser, asyncHandler(async (req, res, 
                 console.log(user.id)
                 console.log(course.userId)
                 await course.update(req.body);
-                console.log(`Course "${req.body.title}" updated successfully!`);
                 res.status(204).end();
             } else {
                 console.log('User not authorized to delete this course')
@@ -204,7 +201,6 @@ router.delete('/courses/:id', this.authenticateUser, asyncHandler(async (req, re
                 console.log(user.id)
                 console.log(course.userId)
                 await course.destroy();
-                console.log(`Course ${req.body.title} has been updated!`);
                 res.status(204).end();
             } 
             else {
