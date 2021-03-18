@@ -38,7 +38,6 @@ export default class CourseDetail extends Component {
     axios.get(`http://localhost:5000/api/${this.props.match.url}`)
       .then(data => {
         this.setState({course: data.data, user: data.data.User});
-        //console.log(this.props.match)
       })
       .catch(err => {
         console.log(err)

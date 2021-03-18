@@ -80,7 +80,6 @@ export default class UserSignIn extends Component {
         } else {
           // push a new entry onto the history stack using the push() method
           this.props.history.push(from);
-          console.log(`Success! ${emailAddress} is now signed in!`);
         }
       })
       .catch(err => {
