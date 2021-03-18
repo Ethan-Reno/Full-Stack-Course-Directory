@@ -8,7 +8,7 @@ import { Provider } from './Context';
 import App from './App';
 
 ReactDOM.render(
-  <Provider>
-    <App />
-  </Provider>,
+    <Provider>
+      <App />
+    </Provider>,
   document.getElementById('root'));

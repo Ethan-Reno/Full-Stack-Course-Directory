@@ -255,8 +255,8 @@ body {
 
 /* line 44, ../sass/global.sass */
 .actions--bar {
-  border-bottom: 1px solid #d5f9fe;
-  background: #f8feff;
+  border-bottom: 1px solid #ffffff;
+  background: #ffffff;
   padding: 20px 0;
   margin-top: -30px;
 }
@@ -719,9 +719,9 @@ input:focus {
   color: #fff;
   font-family: "Work Sans", sans-serif;
   font-size: 18px;
-  padding: 15px 30px;
+  padding: 15px 15px;
   border: 0;
-  margin-right: 10px;
+  margin-right: 5px;
   border-radius: 8px;
   font-weight: bold;
   display: inline-block;

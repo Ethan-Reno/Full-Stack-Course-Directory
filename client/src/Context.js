@@ -12,8 +12,8 @@ export class Provider extends Component {
   }
 
   state = {
-    authenticatedUser: Cookies.getJSON('authenticatedUser') || null
-  };
+    authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
+  }
   
 
   render() {
@@ -45,7 +45,7 @@ export class Provider extends Component {
   // which makes a GET request to the protected /users route on the server and returns the user data.
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
-    // user.password = password;
+    user.password = password;
     if (user !== null) {
       this.setState(() => {
         return {

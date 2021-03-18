@@ -1,6 +1,7 @@
 import React, {Component} from  'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 export default class CourseDetail extends Component {
 
@@ -8,20 +9,6 @@ export default class CourseDetail extends Component {
     course: [],
     user: [],
     errors: []
-  }
-
-  // on load / reload, call API to GET the specific course that matches the id parameter in the URL
-  componentDidMount() {
-    axios.get(`http://localhost:5000/api/${this.props.match.url}`)
-      .then(data => {
-        this.setState({course: data.data, user: data.data.User});
-        //console.log(this.props.match)
-      })
-      .catch(err => {
-        console.log(err)
-        // if there is no match, route to notfound
-        this.props.history.push('/notfound')
-      })
   }
 
   handleDelete = () => {
@@ -46,10 +33,27 @@ export default class CourseDetail extends Component {
       })
   }
 
+  // on load / reload, call API to GET the specific course that matches the id parameter in the URL
+  componentDidMount() {
+    axios.get(`http://localhost:5000/api/${this.props.match.url}`)
+      .then(data => {
+        this.setState({course: data.data, user: data.data.User});
+        //console.log(this.props.match)
+      })
+      .catch(err => {
+        console.log(err)
+        // if there is no match, route to notfound
+        this.props.history.push('/notfound')
+      })
+  }
+
   render(){
 
     const {context} = this.props;
     const authenticatedUser = context.authenticatedUser;
+
+    const estimatedTimeMarkdown = ` #### Estimated Time \n\n ### ${this.state.course.estimatedTime}`
+    const materialsNeededMarkdown = `${this.state.course.materialsNeeded}`
 
     return(
       <div>
@@ -88,12 +92,11 @@ export default class CourseDetail extends Component {
           <div className="course--stats">
             <ul className="course--stats--list">
               <li className="course--stats--list--item">
-                <h4>Estimated Time</h4>
-                  <li>{this.state.course.estimatedTime}</li>
+                  <ReactMarkdown source={estimatedTimeMarkdown}/>
               </li> 
               <li className="course--stats--list--item">
                 <h4>Materials Needed</h4>
-                  <li>{this.state.course.materialsNeeded}</li>
+                  <ReactMarkdown source={materialsNeededMarkdown}/>
               </li>
             </ul>
           </div>

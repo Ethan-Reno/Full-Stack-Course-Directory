@@ -18,18 +18,18 @@ export default class Courses extends Component {
       })
   }
 
-  // on update, call API to GET all courses
-  componentDidUpdate(updateProps) {
-    if (updateProps.location.pathame !== this.props.location.pathname){
-      axios.get('http://localhost:5000/api/courses')
+  // on update (typically when a course is updated or deleted), call API to get all courses
+  componentDidUpdate(nextProps) {
+    if(nextProps.location.pathname !== this.props.location.pathname){
+        axios.get('http://localhost:5000/api/courses')
         .then(data => {
-          this.setState({courses: data.data, user: data.data.User});
+            this.setState({ courses: data.data, user: data.data.User });
         })
-      .catch(err => {
-        console.log(err)
-      })
+        .catch(err => {
+            console.log(err)
+        })
     }
-  }
+}
 
   render(){
     const apiCall = this.state.courses;

@@ -45,7 +45,7 @@ export default class UserSignIn extends Component {
             )} />
           <p>
             Don't have a user account? <Link to="/signup">Click here</Link> to sign up!
-          </p>
+          </p> 
         </div>
       </div>
     );
@@ -65,7 +65,7 @@ export default class UserSignIn extends Component {
   submit = () => {
     // extract the context prop from this.props
     const { context } = this.props;
-    const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     
     // unpack properties from the state object – these are the properties needed to sign in a user
     const { emailAddress, password } = this.state;
@@ -83,12 +83,10 @@ export default class UserSignIn extends Component {
           console.log(`Success! ${emailAddress} is now signed in!`);
         }
       })
-      .catch( err => {
-        console.log(err);
-        this.props.history.push('/error');
-      //   this.setState(() => {
-      //     return { errors: ['Sign-in was unsuccessful'] }
-      // })
+      .catch(err => {
+        this.setState(() => {
+        return { errors: ['Sign-in was unsuccessful'] }
+        })
       })
   }
 
