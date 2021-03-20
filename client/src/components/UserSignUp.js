@@ -114,7 +114,6 @@ export default class UserSignUp extends Component {
         }
     })
     .catch( err => {
-      console.log(err);
       // push a new entry onto the history stack using the push() method
       this.props.history.push('/');
     });

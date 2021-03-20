@@ -14,7 +14,6 @@ export class Provider extends Component {
   state = {
     authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
   }
-  
 
   render() {
 
@@ -36,7 +35,7 @@ export class Provider extends Component {
     return (
       // value represents an object containing the context to be shared throughout the component tree.
       <Context.Provider value={value}> 
-        {this.props.children}
+        {this.props.children} {/*dont understand this part*/}
       </Context.Provider>  
     );
   }
@@ -68,8 +67,6 @@ export class Provider extends Component {
     });
     Cookies.remove('authenticatedUser');
   }
-
-
 }
 
 export const Consumer = Context.Consumer;

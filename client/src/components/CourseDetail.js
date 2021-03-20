@@ -40,7 +40,6 @@ export default class CourseDetail extends Component {
         this.setState({course: data.data, user: data.data.User});
       })
       .catch(err => {
-        console.log(err)
         // if there is no match, route to notfound
         this.props.history.push('/notfound')
       })
@@ -51,8 +50,9 @@ export default class CourseDetail extends Component {
     const {context} = this.props;
     const authenticatedUser = context.authenticatedUser;
 
-    const estimatedTimeMarkdown = ` #### Estimated Time \n\n ### ${this.state.course.estimatedTime}`
-    const materialsNeededMarkdown = `${this.state.course.materialsNeeded}`
+    const descriptionMarkdown = `${this.state.course.description}`;
+    const estimatedTimeMarkdown = ` #### Estimated Time \n\n ### ${this.state.course.estimatedTime}`;
+    const materialsNeededMarkdown = `${this.state.course.materialsNeeded}`;
 
     return(
       <div>
@@ -84,7 +84,7 @@ export default class CourseDetail extends Component {
               <p>By {this.state.user.firstName} {this.state.user.lastName}</p>
             </div>
             <div>
-              <p>{this.state.course.description}</p>
+            <ReactMarkdown source={descriptionMarkdown}/>
             </div>
         </div>
         <div className="grid-25 grid-right">
@@ -92,7 +92,7 @@ export default class CourseDetail extends Component {
             <ul className="course--stats--list">
               <li className="course--stats--list--item">
                   <ReactMarkdown source={estimatedTimeMarkdown}/>
-              </li> 
+              </li>
               <li className="course--stats--list--item">
                 <h4>Materials Needed</h4>
                   <ReactMarkdown source={materialsNeededMarkdown}/>

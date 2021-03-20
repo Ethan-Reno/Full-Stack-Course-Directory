@@ -26,7 +26,7 @@ export default class Courses extends Component {
             this.setState({ courses: data.data, user: data.data.User });
         })
         .catch(err => {
-            console.log(err)
+          this.props.history.push('/error')
         })
     }
 }

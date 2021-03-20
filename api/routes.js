@@ -61,7 +61,6 @@ exports.authenticateUser = async (req, res, next) => {
   if (message) {
 
     // Return a response with a 401 Unauthorized HTTP status code.
-    console.warn(message);
     res.status(401).json({ message: 'Access Denied' });
 
     // Or if user authentication succeeded...
@@ -82,7 +81,6 @@ router.get('/users', this.authenticateUser, asyncHandler(async (req, res, next) 
         lastName: user.dataValues.lastName,
         emailAddress: user.dataValues.emailAddress
     });
-    console.log(user)
     return res.status(200).end();
 }));
 
@@ -100,7 +98,6 @@ router.post('/users', asyncHandler(async (req, res, next) => {
         res.location('/');
         res.status(201).end();
     } catch (error) {
-        console.log('Error: ', error.name);
         if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
             const errors = error.errors.map(err => err.message);
             res.status(400).json({ errors });
@@ -159,7 +156,6 @@ router.post('/courses', this.authenticateUser, asyncHandler(async (req, res, nex
         res.location(`/courses/${course.dataValues.id}`); //sets location header to 
         res.status(201).end();
     } catch (error) {
-        console.log('Error: ', error.name)
         if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
             const errors = error.errors.map(err => err.message);
             res.status(400).json({ errors });
@@ -174,16 +170,12 @@ router.put('/courses/:id', this.authenticateUser, asyncHandler(async (req, res, 
         try {
             let course = await Course.findByPk(req.params.id);
             if (user.id == course.userId) {
-                console.log(user.id)
-                console.log(course.userId)
                 await course.update(req.body);
                 res.status(204).end();
             } else {
-                console.log('User not authorized to delete this course')
                 res.status(403).end();            
             }
         } catch (error) {
-            console.log('Error: ', error.name)
             if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
                 const errors = error.errors.map(err => err.message);
                 res.status(400).json({ errors });
@@ -198,17 +190,13 @@ router.delete('/courses/:id', this.authenticateUser, asyncHandler(async (req, re
         try {
             let course = await Course.findByPk(req.params.id);
             if (user.id == course.userId) {
-                console.log(user.id)
-                console.log(course.userId)
                 await course.destroy();
                 res.status(204).end();
             } 
             else {
-                console.log('User not authorized to delete this course')
                 res.status(403).end();
             }
         } catch (error) {
-            console.log('Error: ', error.name)
             if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
                 const errors = error.errors.map(err => err.message);
                 res.status(400).json({ errors });
