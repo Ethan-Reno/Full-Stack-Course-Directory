@@ -1,5 +1,7 @@
 # Treehouse-Project-10
- Welcome to my final FSJS tech degree project!
+ Full Stack JavaScript Techdegree final project:
+ 
+ Create, view, update and delete courses in a course directory with authentication and authorization
 
  To run, in your terminal from /api, run:
 
@@ -12,4 +14,4 @@ and from /client, run:
 - npm install
 - npm start
 
-Now you can view and interact with the project at localhost:3000!
+View and interact with the project at localhost:3000!
